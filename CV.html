@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hong Hengdavuth | IT Engineering Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Fira Code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            bg: '#0a0d14',
+                            card: '#121824',
+                            border: '#1e293b',
+                            hover: '#1a2333'
+                        },
+                        cyan: {
+                            accent: '#06b6d4',
+                            glow: '#22d3ee'
+                        },
+                        violet: {
+                            accent: '#8b5cf6',
+                            glow: '#a78bfa'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS & Glow Effects -->
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0d14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #06b6d4;
+        }
+
+        /* Glassmorphism styling */
+        .glass-panel {
+            background: rgba(18, 24, 36, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(18, 24, 36, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(6, 182, 212, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -10px rgba(6, 182, 212, 0.15);
+        }
+
+        /* Grid Background Pattern */
+        .bg-grid-pattern {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+
+        /* Glowing text gradient */
+        .text-gradient {
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+}
+
+        /* Terminal blinking cursor */
+        .cursor-blink::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-dark-bg text-slate-300 font-sans antialiased selection:bg-cyan-accent selection:text-slate-900 bg-grid-pattern min-h-screen relative overflow-x-hidden">
+
+    <!-- Background Canvas for Interactive Particles -->
+    <canvas id="bg-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-40"></canvas>
+
+    <!-- Navigation Header (Numbers Removed) -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-slate-800/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-violet-600 flex items-center justify-center text-white font-mono font-bold text-lg shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+                    HD
+                </div>
+                <div>
+                    <span class="font-mono font-bold text-white text-lg tracking-tight group-hover:text-cyan-accent transition-colors">HENGDAVUTH<span class="text-cyan-accent">.dev</span></span>
+                    <p class="text-[10px] text-slate-400 font-mono -mt-1">IT ENGINEER</p>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links without numbers -->
+            <nav class="hidden md:flex items-center space-x-1 font-mono text-sm">
+                <a href="#about" class="px-4 py-2 rounded-lg text-slate-300 hover:text-cyan-accent hover:bg-slate-800/50 transition-all">About</a>
+                <a href="#skills" class="px-4 py-2 rounded-lg text-slate-300 hover:text-cyan-accent hover:bg-slate-800/50 transition-all">Skills</a>
+                <a href="#projects" class="px-4 py-2 rounded-lg text-slate-300 hover:text-cyan-accent hover:bg-slate-800/50 transition-all">Projects</a>
+                <a href="#education" class="px-4 py-2 rounded-lg text-slate-300 hover:text-cyan-accent hover:bg-slate-800/50 transition-all">Education</a>
+                <a href="#contact" class="ml-4 px-5 py-2.5 rounded-xl bg-cyan-500/10 text-cyan-accent border border-cyan-500/30 hover:bg-cyan-500 hover:text-slate-950 font-semibold transition-all shadow-lg shadow-cyan-500/10">
+                    Contact Me
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="menu-btn" class="md:hidden text-slate-300 hover:text-cyan-accent focus:outline-none p-2 rounded-lg bg-slate-800/50 border border-slate-700/50">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown without numbers -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-b border-slate-800 px-6 py-6 space-y-4 font-mono text-sm">
+            <a href="#about" class="mobile-link block py-2 text-slate-300 hover:text-cyan-accent border-b border-slate-800">About</a>
+            <a href="#skills" class="mobile-link block py-2 text-slate-300 hover:text-cyan-accent border-b border-slate-800">Skills</a>
+            <a href="#projects" class="mobile-link block py-2 text-slate-300 hover:text-cyan-accent border-b border-slate-800">Projects</a>
+            <a href="#education" class="mobile-link block py-2 text-slate-300 hover:text-cyan-accent border-b border-slate-800">Education</a>
+            <a href="#contact" class="mobile-link block py-3 text-center rounded-xl bg-cyan-500 text-slate-950 font-bold mt-4">
+                Contact Me
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 space-y-32">
+
+        <!-- 1. HOME / HERO SECTION -->
+        <section id="home" class="min-h-[85vh] flex flex-col justify-center pt-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Left Column Text -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-panel border border-cyan-500/30 text-cyan-accent text-xs font-mono">
+                        <span class="w-2 h-2 rounded-full bg-cyan-accent animate-ping"></span>
+                        Available for Engineering Opportunities
+                    </div>
+
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-none">
+                        Hi, I'm <br>
+                        <span class="text-gradient">HONG HENGDAVUTH</span>
+                    </h1>
+
+                    <div class="flex items-center gap-2 font-mono text-lg sm:text-2xl text-slate-300 font-semibold">
+                        <span class="text-cyan-accent">&gt;</span>
+                        <span id="typed-role" class="cursor-blink">Information Technology Engineering Student</span>
+                    </div>
+
+                    <p class="text-slate-400 text-base sm:text-lg max-w-2xl font-normal leading-relaxed">
+                        Building efficient software, exploring algorithms, and solving complex problems through code.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-wrap items-center gap-4 pt-4 font-mono text-sm">
+                        <a href="#projects" class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold hover:shadow-lg hover:shadow-cyan-500/25 transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                            <span>View Projects</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                        <a href="#contact" class="px-7 py-3.5 rounded-xl glass-panel text-slate-200 hover:text-cyan-accent border border-slate-700 hover:border-cyan-500/50 transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                            <i class="fa-regular fa-envelope"></i>
+                            <span>Contact Me</span>
+                        </a>
+                    </div>
+
+                    <!-- Quick Tech Badges -->
+                    <div class="pt-8 border-t border-slate-800/80 flex flex-wrap items-center gap-6 text-slate-400 font-mono text-xs">
+                        <span class="text-slate-500 uppercase tracking-wider">Core Tech:</span>
+                        <span class="flex items-center gap-1.5 hover:text-cyan-accent transition-colors"><i class="fa-solid fa-code text-cyan-accent"></i> C / C++</span>
+                        <span class="flex items-center gap-1.5 hover:text-cyan-accent transition-colors"><i class="fa-solid fa-desktop text-violet-accent"></i> GTK GUI</span>
+                        <span class="flex items-center gap-1.5 hover:text-cyan-accent transition-colors"><i class="fa-solid fa-square-root-variable text-blue-400"></i> Applied Math</span>
+                    </div>
+                </div>
+
+                <!-- Hero Right Column: Profile Picture Frame -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative group">
+                        <!-- Neon Glow Ring behind image -->
+                        <div class="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 to-violet-600 rounded-3xl blur-lg opacity-40 group-hover:opacity-80 transition duration-500"></div>
+                        
+                        <!-- Image Frame Wrapper -->
+                        <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-3xl overflow-hidden glass-panel border border-slate-700/80 bg-slate-900 flex items-center justify-center">
+                            
+                            <!-- REPLACE 'profile.jpg' WITH YOUR ACTUAL IMAGE PATH OR URL HERE -->
+                            <img 
+                                src="../image.png"
+                                alt="Hong Hengdavuth" 
+                                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                                onerror="this.onerror=null; this.classList.add('hidden'); document.getElementById('profile-fallback').classList.remove('hidden');"
+                            />
+
+                            <!-- Fallback initials container shown when 'profile.jpg' isn't found -->
+                            <div id="profile-fallback" class="hidden flex flex-col items-center justify-center text-center p-4">
+                                <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500 to-violet-600 flex items-center justify-center text-white font-mono font-bold text-3xl mb-3 shadow-lg">
+                                    HD
+                                </div>
+                                <span class="font-mono text-xs text-slate-400">Hong Hengdavuth</span>
+                                <span class="font-mono text-[10px] text-cyan-accent mt-1">Add your image as "profile.jpg"</span>
+                            </div>
+
+                            <!-- Floating Badge -->
+                            <div class="absolute bottom-3 left-3 right-3 px-3 py-2 glass-panel border border-slate-700/80 rounded-xl flex items-center justify-between text-xs font-mono">
+                                <span class="flex items-center gap-2 text-slate-300">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                    IT Student
+                                </span>
+                                <span class="text-cyan-accent">RUPP / ITE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 2. ABOUT ME SECTION -->
+        <section id="about" class="space-y-12">
+            <div class="flex items-center gap-4">
+                <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">About Me</h2>
+                <div class="h-px bg-slate-800 flex-1 ml-4"></div>
+            </div>
+
+            <!-- Background Card with Profile Image Thumbnail -->
+            <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-6 text-slate-300 leading-relaxed flex flex-col md:flex-row gap-8 items-center md:items-start">
+                
+                <!-- Secondary Profile Photo Slot inside About Section -->
+                <div class="shrink-0 relative">
+                    <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl overflow-hidden border-2 border-cyan-500/40 shadow-xl bg-slate-900 flex items-center justify-center">
+                        <!-- REPLACE 'profile.jpg' WITH YOUR IMAGE PATH -->
+                        <img 
+                            src="../image.png" 
+                            alt="Hong Hengdavuth" 
+                            class="w-full h-full object-cover"
+                            onerror="this.onerror=null; this.classList.add('hidden'); document.getElementById('about-fallback').classList.remove('hidden');"
+                        />
+                        <div id="about-fallback" class="hidden text-center p-2">
+                            <i class="fa-solid fa-user-gear text-3xl text-cyan-accent mb-1"></i>
+                            <p class="font-mono text-[10px] text-slate-400">HENGDAVUTH</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-4 flex-1">
+                    <p class="text-base sm:text-lg">
+                        I am an <strong class="text-white font-semibold">Information Technology Engineering student</strong> focused on software development, low-level systems programming, and applied mathematics. My technical foundation centers on building reliable software applications from the ground up, with a strong emphasis on clean code structure, logical problem-solving, and efficient algorithms.
+                    </p>
+                    <p class="text-slate-400">
+                        Throughout my studies and personal projects, I have developed practical experience in <span class="text-cyan-accent font-mono">C programming</span>, working directly with development environments like MSYS2, managing dependencies, and building desktop graphical user interfaces using <span class="text-cyan-accent font-mono">GTK</span>. My approach to engineering is heavily informed by mathematical analysis—applying calculus and algorithmic principles to solve complex logic problems and parse data effectively.
+                    </p>
+                    <p class="text-slate-400">
+                        Beyond core desktop application development, I actively explore computer science fundamentals through block-based programming logic, interactive simulations, and UI/UX design concepts to create well-rounded, user-focused digital experiences.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Core Focus Areas (3 Interactive Cards) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                
+                <!-- Focus Card 1 -->
+                <div class="glass-card rounded-2xl p-6 space-y-4 hover:border-cyan-500/50 group">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-accent text-xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-cyan-accent transition-colors">Software Engineering & C Programming</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Writing performant, clean, and structured C/C++ code with low-level control, MSYS2/GCC setup, dynamic memory allocation, and modular software architecture.
+                    </p>
+                </div>
+
+                <!-- Focus Card 2 -->
+                <div class="glass-card rounded-2xl p-6 space-y-4 hover:border-violet-500/50 group">
+                    <div class="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-accent text-xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-square-root-variable"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-violet-accent transition-colors">Mathematics & Algorithm Analysis</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Applying single and multivariable calculus, linear algebra, logic operations, and mathematical parsing to engineer robust algorithm solutions.
+                    </p>
+                </div>
+
+                <!-- Focus Card 3 -->
+                <div class="glass-card rounded-2xl p-6 space-y-4 hover:border-blue-500/50 group">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-window-maximize"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors">UI Development & Desktop Applications</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Creating event-driven desktop software with responsive layouts using GTK GUI libraries, custom styling, signal mechanisms, and structured data flow.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3. SKILLS & TECHNOLOGIES -->
+        <section id="skills" class="space-y-12">
+            <div class="flex items-center gap-4">
+                <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Skills & Technologies</h2>
+                <div class="h-px bg-slate-800 flex-1 ml-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Category 1: Programming Languages -->
+                <div class="glass-card rounded-2xl p-6 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+                        <i class="fa-solid fa-terminal text-cyan-accent text-lg"></i>
+                        <h3 class="font-mono font-bold text-white text-base">Programming Languages</h3>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between font-mono text-xs mb-1.5">
+                                <span class="text-slate-200">C Language</span>
+                                <span class="text-cyan-accent">Advanced</span>
+                            </div>
+                            <div class="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full w-[90%]"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between font-mono text-xs mb-1.5">
+                                <span class="text-slate-200">C++</span>
+                                <span class="text-cyan-accent">Proficient</span>
+                            </div>
+                            <div class="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full w-[82%]"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between font-mono text-xs mb-1.5">
+                                <span class="text-slate-200">HTML5 / CSS3</span>
+                                <span class="text-cyan-accent">Intermediate</span>
+                            </div>
+                            <div class="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full w-[78%]"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between font-mono text-xs mb-1.5">
+                                <span class="text-slate-200">JavaScript</span>
+                                <span class="text-cyan-accent">Intermediate</span>
+                            </div>
+                            <div class="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full w-[70%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 2: GUI & Libraries -->
+                <div class="glass-card rounded-2xl p-6 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+                        <i class="fa-solid fa-cubes text-violet-accent text-lg"></i>
+                        <h3 class="font-mono font-bold text-white text-base">GUI & Libraries</h3>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <span class="px-4 py-2 rounded-xl glass-panel border border-violet-500/30 text-slate-200 font-mono text-xs flex items-center gap-2">
+                            <i class="fa-solid fa-window-restore text-violet-accent"></i> GTK Library (C/C++)
+                        </span>
+                        <span class="px-4 py-2 rounded-xl glass-panel border border-violet-500/30 text-slate-200 font-mono text-xs flex items-center gap-2">
+                            <i class="fa-solid fa-diagram-project text-violet-accent"></i> Signal Mechanism
+                        </span>
+                        <span class="px-4 py-2 rounded-xl glass-panel border border-violet-500/30 text-slate-200 font-mono text-xs flex items-center gap-2">
+                            <i class="fa-solid fa-layer-group text-violet-accent"></i> Event-Driven GUI
+                        </span>
+                        <span class="px-4 py-2 rounded-xl glass-panel border border-violet-500/30 text-slate-200 font-mono text-xs flex items-center gap-2">
+                            <i class="fa-solid fa-paint-brush text-violet-accent"></i> Custom GTK Layouts
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Category 3: Tools & Environments -->
+                <div class="glass-card rounded-2xl p-6 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+                        <i class="fa-solid fa-gears text-blue-400 text-lg"></i>
+                        <h3 class="font-mono font-bold text-white text-base">Tools & Environments</h3>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 pt-2 font-mono text-xs">
+                        <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center gap-2 text-slate-300">
+                            <i class="fa-brands fa-windows text-blue-400"></i> MSYS2 / GCC
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center gap-2 text-slate-300">
+                            <i class="fa-brands fa-git-alt text-orange-500"></i> Git & GitHub
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center gap-2 text-slate-300">
+                            <i class="fa-brands fa-linux text-yellow-500"></i> Linux / Windows
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center gap-2 text-slate-300">
+                            <i class="fa-solid fa-code text-cyan-accent"></i> VS Code / Terminal
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 4: Core Strengths -->
+                <div class="glass-card rounded-2xl p-6 space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+                        <i class="fa-solid fa-brain text-emerald-400 text-lg"></i>
+                        <h3 class="font-mono font-bold text-white text-base">Core Strengths</h3>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2.5 pt-2 font-mono text-xs">
+                        <span class="px-3.5 py-2 rounded-lg bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">Analytical Problem Solving</span>
+                        <span class="px-3.5 py-2 rounded-lg bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">Logic & Mathematics</span>
+                        <span class="px-3.5 py-2 rounded-lg bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">Block Logic (Scratch)</span>
+                        <span class="px-3.5 py-2 rounded-lg bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">Data Structures & Logic Flow</span>
+                        <span class="px-3.5 py-2 rounded-lg bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">UI/UX Layout Concepts</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. PROJECTS SHOWCASE -->
+        <section id="projects" class="space-y-12">
+            <div class="flex items-center gap-4">
+                <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Projects Showcase</h2>
+                <div class="h-px bg-slate-800 flex-1 ml-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Project Card 1 -->
+                <div class="glass-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-6 group">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-accent font-mono text-xs">
+                                Desktop App
+                            </span>
+                            <a href="https://github.com/vuthbuildsthefuture" target="_blank" class="text-slate-400 hover:text-white text-lg transition-colors">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-cyan-accent transition-colors">C Calculator Pro</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            A desktop calculator designed with a responsive graphical user interface, robust signal-handling mechanisms, and custom expression parsing for mathematical operations.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4 pt-4 border-t border-slate-800">
+                        <div class="flex flex-wrap gap-2 font-mono text-[11px]">
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-cyan-300">C</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-cyan-300">C++</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-cyan-300">GTK</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-cyan-300">MSYS2</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-cyan-300">GCC</span>
+                        </div>
+
+                        <button onclick="openModal('calc')" class="w-full py-2.5 rounded-xl glass-panel text-slate-300 hover:text-cyan-accent border border-slate-700/80 hover:border-cyan-500/40 text-xs font-mono font-semibold transition-all">
+                            View Details <i class="fa-solid fa-angle-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="glass-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-6 group">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/30 text-violet-accent font-mono text-xs">
+                                Logic & Simulation
+                            </span>
+                            <a href="https://github.com/vuthbuildsthefuture" target="_blank" class="text-slate-400 hover:text-white text-lg transition-colors">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-violet-accent transition-colors">Interactive Logic & Simulation Suite</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            A collection of educational interactive projects—including a mathematical quiz engine and traffic light controller—built to demonstrate complex state management and sequential logic design.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4 pt-4 border-t border-slate-800">
+                        <div class="flex flex-wrap gap-2 font-mono text-[11px]">
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-violet-300">Scratch</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-violet-300">Logic Design</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-violet-300">Event-Driven Flow</span>
+                        </div>
+
+                        <button onclick="openModal('sim')" class="w-full py-2.5 rounded-xl glass-panel text-slate-300 hover:text-violet-accent border border-slate-700/80 hover:border-violet-500/40 text-xs font-mono font-semibold transition-all">
+                            View Details <i class="fa-solid fa-angle-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="glass-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-6 group">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 font-mono text-xs">
+                                Desktop POS System
+                            </span>
+                            <a href="https://github.com/vuthbuildsthefuture" target="_blank" class="text-slate-400 hover:text-white text-lg transition-colors">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">C++ POS Cafe System</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            A Point of Sale (POS) desktop application designed for cafe operations, featuring automated order processing, receipt generation, inventory tracking, and sales analytics.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4 pt-4 border-t border-slate-800">
+                        <div class="flex flex-wrap gap-2 font-mono text-[11px]">
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-blue-300">C++</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-blue-300">OOP</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-blue-300">Data Structures</span>
+                        </div>
+
+                        <button onclick="openModal('pos')" class="w-full py-2.5 rounded-xl glass-panel text-slate-300 hover:text-blue-400 border border-slate-700/80 hover:border-blue-500/40 text-xs font-mono font-semibold transition-all">
+                            View Details <i class="fa-solid fa-angle-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project Card 4 -->
+                <div class="glass-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-6 group">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs">
+                                Graphic Design
+                            </span>
+                            <a href="#" class="text-slate-400 hover:text-white text-lg transition-colors">
+                                <i class="fa-solid fa-palette"></i>
+                            </a>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">Graphic & Team Branding Projects</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Visual branding and vector artwork assets crafted for athletic and technical teams, featuring customized crests, clean typography, and tech-themed logo iconography.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4 pt-4 border-t border-slate-800">
+                        <div class="flex flex-wrap gap-2 font-mono text-[11px]">
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-emerald-300">Vector Design</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-emerald-300">Image Editing</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-emerald-300">Graphic Layout</span>
+                        </div>
+
+                        <button onclick="openModal('brand')" class="w-full py-2.5 rounded-xl glass-panel text-slate-300 hover:text-emerald-400 border border-slate-700/80 hover:border-emerald-500/40 text-xs font-mono font-semibold transition-all">
+                            View Details <i class="fa-solid fa-angle-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 5. EDUCATION & ACADEMICS -->
+        <section id="education" class="space-y-12">
+            <div class="flex items-center gap-4">
+                <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Education & Academics</h2>
+                <div class="h-px bg-slate-800 flex-1 ml-4"></div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-8">
+                <!-- Degree Header -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-6">
+                    <div class="space-y-1">
+                        <h3 class="text-xl font-bold text-white">Bachelor of Engineering in Information Technology</h3>
+                        <p class="text-cyan-accent font-mono text-sm">Undergraduate Student</p>
+                    </div>
+                    <span class="px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-accent font-mono text-xs w-fit">
+                        In Progress
+                    </span>
+                </div>
+
+                <!-- Coursework Grid -->
+                <div class="space-y-6">
+                    <h4 class="font-mono text-sm font-semibold text-slate-300 uppercase tracking-wider">Relevant Coursework</h4>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <!-- Math Block -->
+                        <div class="p-5 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-3">
+                            <div class="flex items-center gap-2.5 text-violet-accent font-bold font-mono text-sm">
+                                <i class="fa-solid fa-calculator"></i>
+                                <span>Advanced Mathematics</span>
+                            </div>
+                            <ul class="space-y-2 text-slate-400 text-sm">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-violet-accent"></i> Single & Multivariable Calculus</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-violet-accent"></i> Integration Techniques</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-violet-accent"></i> Linear Algebra</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-violet-accent"></i> Differential Equations</li>
+                            </ul>
+                        </div>
+
+                        <!-- CS Systems Block -->
+                        <div class="p-5 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-3">
+                            <div class="flex items-center gap-2.5 text-cyan-accent font-bold font-mono text-sm">
+                                <i class="fa-solid fa-microchip"></i>
+                                <span>Software & Systems</span>
+                            </div>
+                            <ul class="space-y-2 text-slate-400 text-sm">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-cyan-accent"></i> Programming Fundamentals (C/C++)</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-cyan-accent"></i> Data Structures & Algorithms</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-cyan-accent"></i> Computer Systems Architecture</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-cyan-accent"></i> GUI Application Development</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. CONTACT & SOCIALS -->
+        <section id="contact" class="space-y-12">
+            <div class="flex items-center gap-4">
+                <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Get In Touch</h2>
+                <div class="h-px bg-slate-800 flex-1 ml-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- Direct Social Cards & Copy Buttons -->
+                <div class="lg:col-span-5 space-y-4">
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        I am always open to discussing software development, low-level engineering projects, algorithms, or potential collaborations. Feel free to reach out directly!
+                    </p>
+
+                    <!-- Email Card -->
+                    <div class="glass-card rounded-xl p-4 flex items-center justify-between">
+                        <div class="flex items-center gap-3 overflow-hidden">
+                            <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-accent shrink-0">
+                                <i class="fa-regular fa-envelope"></i>
+                            </div>
+                            <div class="truncate">
+                                <p class="text-[10px] text-slate-500 font-mono">EMAIL</p>
+                                <p class="text-sm font-mono text-slate-200 truncate">davuthhongheng@gmail.com</p>
+                            </div>
+                        </div>
+                        <button onclick="copyToClipboard('davuthhongheng@gmail.com', 'Email')" class="p-2 text-slate-400 hover:text-cyan-accent transition-colors">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+
+                    <!-- Phone Card -->
+                    <div class="glass-card rounded-xl p-4 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-slate-500 font-mono">PHONE / TEL</p>
+                                <p class="text-sm font-mono text-slate-200">+855 12986496</p>
+                            </div>
+                        </div>
+                        <button onclick="copyToClipboard('+855 12986496', 'Phone')" class="p-2 text-slate-400 hover:text-emerald-400 transition-colors">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+
+                    <!-- Discord Card -->
+                    <div class="glass-card rounded-xl p-4 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 shrink-0">
+                                <i class="fa-brands fa-discord"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-slate-500 font-mono">DISCORD</p>
+                                <p class="text-sm font-mono text-slate-200">dv00_19</p>
+                            </div>
+                        </div>
+                        <button onclick="copyToClipboard('dv00_19', 'Discord handle')" class="p-2 text-slate-400 hover:text-indigo-400 transition-colors">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+
+                    <!-- External Links (GitHub & Facebook) -->
+                    <div class="grid grid-cols-2 gap-4 pt-2">
+                        <a href="https://github.com/vuthbuildsthefuture" target="_blank" class="glass-card p-4 rounded-xl flex items-center justify-center gap-2 text-slate-300 hover:text-cyan-accent font-mono text-xs font-semibold">
+                            <i class="fa-brands fa-github text-base"></i> GitHub
+                        </a>
+                        <a href="https://www.facebook.com/Sottt.19/" target="_blank" class="glass-card p-4 rounded-xl flex items-center justify-center gap-2 text-slate-300 hover:text-blue-400 font-mono text-xs font-semibold">
+                            <i class="fa-brands fa-facebook text-base"></i> Facebook
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Interactive Contact Form -->
+                <div class="lg:col-span-7">
+                    <form id="contact-form" onsubmit="handleFormSubmit(event)" class="glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="font-mono text-xs text-slate-400">Your Name</label>
+                                <input type="text" required placeholder="Da Vuth" class="w-full bg-slate-900/80 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 transition-colors">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="font-mono text-xs text-slate-400">Your Email</label>
+                                <input type="email" required placeholder="vuth@example.com" class="w-full bg-slate-900/80 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 transition-colors">
+                            </div>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="font-mono text-xs text-slate-400">Subject</label>
+                            <input type="text" required placeholder="Project Collaboration / Inquiry" class="w-full bg-slate-900/80 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 transition-colors">
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="font-mono text-xs text-slate-400">Message</label>
+                            <textarea rows="4" required placeholder="Write your message here..." class="w-full bg-slate-900/80 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 transition-colors resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-mono font-bold hover:shadow-lg hover:shadow-cyan-500/20 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Send Message</span>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 py-8 relative z-10 font-mono text-xs text-center text-slate-500 space-y-2">
+        <p>&copy; 2026 Hong Hengdavuth. Designed & Built for IT Engineering.</p>
+        <p class="text-[11px] text-slate-600">Built with C-Developer passion, HTML5, CSS3 & JavaScript.</p>
+    </footer>
+
+    <!-- Project Details Modal -->
+    <div id="modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div class="glass-panel max-w-lg w-full rounded-2xl p-6 sm:p-8 space-y-6 relative border border-slate-700/80 shadow-2xl">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2 text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div id="modal-content" class="space-y-4">
+                <!-- Dynamically injected modal content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Box -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden glass-panel border border-cyan-500/50 text-slate-100 px-5 py-3 rounded-xl shadow-2xl font-mono text-xs flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-cyan-accent text-base"></i>
+        <span id="toast-msg">Action completed!</span>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Interactive Particles Canvas Animation
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(34, 211, 238, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 45; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateBg() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateBg);
+        }
+        animateBg();
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Copy To Clipboard Functionality
+        function copyToClipboard(text, label) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            showToast(`${label} copied to clipboard!`);
+        }
+
+        // Toast Notification System
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-msg');
+            toastMsg.textContent = msg;
+            toast.classList.remove('hidden');
+
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Form Submit Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            showToast('Thank you! Your message has been sent.');
+            document.getElementById('contact-form').reset();
+        }
+
+        // Project Modal Handling
+        const projectData = {
+            calc: {
+                title: "C Calculator Pro (Desktop)",
+                badge: "C / GTK App",
+                desc: "A lightweight, performant desktop application created in C using GTK. Supports basic and mathematical operations with robust signal-handling mechanisms and custom expression parsing.",
+                tech: ["C", "C++", "GTK", "MSYS2", "GCC"],
+                features: ["Real-time input expression parsing", "Signal callback mechanism for dynamic GUI buttons", "Efficient memory management in low-level C"]
+            },
+            sim: {
+                title: "Interactive Logic & Simulation Suite",
+                badge: "Educational Logic",
+                desc: "A series of sequential logic simulations including traffic light state machines and interactive math quiz engines created to model state flows.",
+                tech: ["Scratch", "Logic Design", "Event-Driven Flow"],
+                features: ["Algorithmic score evaluation", "Visual traffic light state controller", "Modular event listener design"]
+            },
+            pos: {
+                title: "C++ POS Cafe System",
+                badge: "C++ Desktop Application",
+                desc: "A complete Point of Sale (POS) desktop system for cafe operations featuring real-time menu management, transaction processing, receipt generation, and sales logs.",
+                tech: ["C++", "Object-Oriented Programming (OOP)", "Data Structures"],
+                features: ["Order queuing and bill calculations", "Stock and inventory management", "Sales reporting and structured transaction logging"]
+            },
+            brand: {
+                title: "Graphic & Team Branding Projects",
+                badge: "Visual Artwork",
+                desc: "Custom graphic design assets created for athletic and technical engineering groups, including vector logos, typography, crests, and identity branding.",
+                tech: ["Vector Design", "Image Editing", "Graphic Layout"],
+                features: ["Custom athletic & tech crests", "Scalable vector graphics", "Clean typography layouts"]
+            }
+        };
+
+        function openModal(key) {
+            const data = projectData[key];
+            if (!data) return;
+
+            const content = document.getElementById('modal-content');
+            content.innerHTML = `
+                <span class="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-accent font-mono text-xs">
+                    ${data.badge}
+                </span>
+                <h3 class="text-xl font-bold text-white mt-2">${data.title}</h3>
+                <p class="text-slate-300 text-sm leading-relaxed">${data.desc}</p>
+                
+                <div class="space-y-2 pt-2">
+                    <h4 class="font-mono text-xs font-bold text-slate-400 uppercase">Key Features</h4>
+                    <ul class="space-y-1 text-slate-400 text-xs font-sans">
+                        ${data.features.map(f => `<li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-accent"></i> ${f}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="pt-4 border-t border-slate-800 flex flex-wrap gap-2 font-mono text-[11px]">
+                    ${data.tech.map(t => `<span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300">${t}</span>`).join('')}
+                </div>
+            `;
+
+            document.getElementById('modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
