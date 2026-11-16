@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import portfolioMarkup from './portfolio.html?raw';
 import './styles.css';
@@ -31,6 +31,47 @@ const projects = {
 };
 
 function App() {
+  const [loading, setLoading] = useState(true);
+  const [loadProgress, setLoadProgress] = useState(0);
+
+  useEffect(() => {
+    let completed = false;
+    let progressTimer;
+    let finishTimer;
+    let progress = 0;
+    const startedAt = performance.now();
+
+    const images = [...document.querySelectorAll('#root img')];
+    const imageLoads = images.map((image) => {
+      if (image.complete) return Promise.resolve();
+      return new Promise((resolve) => {
+        image.addEventListener('load', resolve, { once: true });
+        image.addEventListener('error', resolve, { once: true });
+      });
+    });
+    const fontsReady = document.fonts?.ready ?? Promise.resolve();
+
+    progressTimer = window.setInterval(() => {
+      if (progress >= 90) return;
+      progress = Math.min(90, progress + Math.max(1, Math.ceil((90 - progress) / 12)));
+      setLoadProgress(progress);
+    }, 55);
+
+    Promise.allSettled([...imageLoads, fontsReady]).then(() => {
+      if (completed) return;
+      window.clearInterval(progressTimer);
+      setLoadProgress(100);
+      const minimumVisibleTime = Math.max(0, 850 - (performance.now() - startedAt));
+      finishTimer = window.setTimeout(() => setLoading(false), minimumVisibleTime + 450);
+    });
+
+    return () => {
+      completed = true;
+      window.clearInterval(progressTimer);
+      window.clearTimeout(finishTimer);
+    };
+  }, []);
+
   useEffect(() => {
     const canvas = document.getElementById('bg-canvas');
     const context = canvas?.getContext('2d');
@@ -67,6 +108,29 @@ function App() {
     resize();
     animate();
     window.addEventListener('resize', resize);
+
+    const progressBar = document.getElementById('scroll-progress');
+    const updateProgress = () => {
+      if (!progressBar) return;
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.transform = `scaleX(${scrollable > 0 ? window.scrollY / scrollable : 0})`;
+    };
+    updateProgress();
+    window.addEventListener('scroll', updateProgress, { passive: true });
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(({ isIntersecting, target }) => {
+        if (isIntersecting) {
+          target.classList.add('is-visible');
+          observer.unobserve(target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('main section, .glass-card').forEach((element, index) => {
+      element.classList.add('reveal-on-scroll');
+      element.style.setProperty('--reveal-delay', `${Math.min(index % 4, 3) * 90}ms`);
+      revealObserver.observe(element);
+    });
 
     const toast = (message) => {
       const box = document.getElementById('toast');
@@ -136,10 +200,29 @@ function App() {
     window.copyToClipboard = copyToClipboard;
     window.openModal = openModal;
     window.closeModal = () => document.getElementById('modal')?.classList.add('hidden');
-    window.handleFormSubmit = (event) => {
+    window.handleFormSubmit = async (event) => {
       event.preventDefault();
-      toast('Thank you! Your message has been sent.');
-      event.currentTarget.reset();
+      const form = event.currentTarget;
+      const submitButton = form.querySelector('button[type="submit"]');
+      const label = submitButton?.querySelector('span');
+      if (submitButton?.disabled) return;
+      submitButton.disabled = true;
+      if (label) label.textContent = 'Sending...';
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(Object.fromEntries(new FormData(form)))
+        });
+        if (!response.ok) throw new Error('Message delivery failed');
+        toast('Message sent! Thanks for reaching out.');
+        form.reset();
+      } catch {
+        toast('Could not send your message. Please try again later.');
+      } finally {
+        submitButton.disabled = false;
+        if (label) label.textContent = 'Send Message';
+      }
     };
 
     const menuButton = document.getElementById('menu-btn');
@@ -153,6 +236,8 @@ function App() {
       cancelAnimationFrame(frame);
       window.clearTimeout(toastTimer);
       window.removeEventListener('resize', resize);
+      window.removeEventListener('scroll', updateProgress);
+      revealObserver.disconnect();
       menuButton?.removeEventListener('click', toggleMenu);
       mobileMenu?.querySelectorAll('.mobile-link').forEach((link) => link.removeEventListener('click', closeMenu));
       delete window.copyToClipboard;
@@ -162,7 +247,19 @@ function App() {
     };
   }, []);
 
-  return <div dangerouslySetInnerHTML={{ __html: portfolioMarkup }} />;
+  return <>
+    <div id="scroll-progress" className="scroll-progress" aria-hidden="true" />
+    <div dangerouslySetInnerHTML={{ __html: portfolioMarkup }} />
+    {loading && <div className="startup-loader" role="status" aria-live="polite" aria-label={`Loading portfolio: ${loadProgress}%`}>
+      <div className="startup-loader-content">
+        <div className="startup-loader-mark">HD</div>
+        <p className="startup-loader-name">HENGDAVUTH<span>.dev</span></p>
+        <p className="startup-loader-caption">INITIALIZING PORTFOLIO</p>
+        <div className="startup-loader-track"><div className="startup-loader-fill" style={{ width: `${loadProgress}%` }} /></div>
+        <div className="startup-loader-status"><span>LOADING</span><span>{loadProgress}%</span></div>
+      </div>
+    </div>}
+  </>;
 }
 
 createRoot(document.getElementById('root')).render(<React.StrictMode><App /></React.StrictMode>);
