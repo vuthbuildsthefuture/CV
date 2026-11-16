@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0d14" />
+    <meta name="description" content="Hong Hengdavuth's IT engineering portfolio." />
+    <title>Hong Hengdavuth | IT Engineering Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: { extend: {
+          colors: {
+            dark: { bg: '#0a0d14', card: '#121824', border: '#1e293b', hover: '#1a2333' },
+            cyan: { accent: '#06b6d4', glow: '#22d3ee' },
+            violet: { accent: '#8b5cf6', glow: '#a78bfa' }
+          },
+          fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['Fira Code', 'monospace'] }
+        }}
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  </head>
+  <body class="bg-dark-bg text-slate-300 font-sans antialiased selection:bg-cyan-accent selection:text-slate-900 bg-grid-pattern min-h-screen relative overflow-x-hidden">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
