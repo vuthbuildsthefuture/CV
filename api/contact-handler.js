@@ -34,11 +34,15 @@ export async function sendContact(data, { token, chatId }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'MarkdownV2' })
     });
-    if (!telegramResponse.ok) {
-      const telegramError = await telegramResponse.json().catch(() => ({}));
-      console.error('Telegram rejected a contact notification:', telegramResponse.status, telegramError.description);
+    const telegramResult = await telegramResponse.json().catch(() => ({}));
+    if (!telegramResponse.ok || !telegramResult.ok) {
+      console.error('Telegram rejected a contact notification:', telegramResponse.status, telegramResult.description);
       return { status: 502, body: { error: 'Message delivery failed' } };
     }
+    console.info('Telegram contact notification delivered:', {
+      chatId: telegramResult.result?.chat?.id,
+      messageId: telegramResult.result?.message_id
+    });
     return { status: 200, body: { ok: true } };
   } catch (error) {
     console.error('Telegram contact notification failed:', error);
