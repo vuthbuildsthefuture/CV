@@ -33,11 +33,13 @@ const projects = {
 function App() {
   const [loading, setLoading] = useState(true);
   const [loadProgress, setLoadProgress] = useState(0);
+  const [loaderExiting, setLoaderExiting] = useState(false);
 
   useEffect(() => {
     let completed = false;
     let progressTimer;
     let finishTimer;
+    let exitTimer;
     let progress = 0;
     const startedAt = performance.now();
 
@@ -62,13 +64,17 @@ function App() {
       window.clearInterval(progressTimer);
       setLoadProgress(100);
       const minimumVisibleTime = Math.max(0, 850 - (performance.now() - startedAt));
-      finishTimer = window.setTimeout(() => setLoading(false), minimumVisibleTime + 450);
+      finishTimer = window.setTimeout(() => {
+        setLoaderExiting(true);
+        exitTimer = window.setTimeout(() => setLoading(false), 650);
+      }, minimumVisibleTime + 450);
     });
 
     return () => {
       completed = true;
       window.clearInterval(progressTimer);
       window.clearTimeout(finishTimer);
+      window.clearTimeout(exitTimer);
     };
   }, []);
 
@@ -250,7 +256,7 @@ function App() {
   return <>
     <div id="scroll-progress" className="scroll-progress" aria-hidden="true" />
     <div dangerouslySetInnerHTML={{ __html: portfolioMarkup }} />
-    {loading && <div className="startup-loader" role="status" aria-live="polite" aria-label={`Loading portfolio: ${loadProgress}%`}>
+    {loading && <div className={`startup-loader${loaderExiting ? ' is-exiting' : ''}`} role="status" aria-live="polite" aria-label={`Loading portfolio: ${loadProgress}%`}>
       <div className="startup-loader-content">
         <div className="startup-loader-mark">
           <img src="/image.png" alt="Hong Hengdavuth" />
