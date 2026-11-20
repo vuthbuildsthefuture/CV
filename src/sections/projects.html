@@ -1,0 +1,133 @@
+<!-- 4. PROJECTS SHOWCASE -->
+        <section id="projects" class="space-y-12">
+            <div class="flex items-center gap-4">
+                <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Projects Showcase</h2>
+                <div class="h-px bg-slate-800 flex-1 ml-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Project Card 1 -->
+                <div class="glass-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-6 group">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-accent font-mono text-xs">
+                                Desktop App
+                            </span>
+                            <a href="https://github.com/vuthbuildsthefuture" target="_blank" class="text-slate-400 hover:text-white text-lg transition-colors">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-cyan-accent transition-colors">C Calculator Pro</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            A desktop calculator designed with a responsive graphical user interface, robust signal-handling mechanisms, and custom expression parsing for mathematical operations.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4 pt-4 border-t border-slate-800">
+                        <div class="flex flex-wrap gap-2 font-mono text-[11px]">
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-cyan-300">C</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-cyan-300">C++</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-cyan-300">GTK</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-cyan-300">MSYS2</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-cyan-300">GCC</span>
+                        </div>
+
+                        <button onclick="openModal('calc')" class="w-full py-2.5 rounded-xl glass-panel text-slate-300 hover:text-cyan-accent border border-slate-700/80 hover:border-cyan-500/40 text-xs font-mono font-semibold transition-all">
+                            View Details <i class="fa-solid fa-angle-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="glass-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-6 group">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/30 text-violet-accent font-mono text-xs">
+                                Logic & Simulation
+                            </span>
+                            <a href="https://github.com/vuthbuildsthefuture" target="_blank" class="text-slate-400 hover:text-white text-lg transition-colors">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-violet-accent transition-colors">Interactive Logic & Simulation Suite</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            A collection of educational interactive projects—including a mathematical quiz engine and traffic light controller—built to demonstrate complex state management and sequential logic design.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4 pt-4 border-t border-slate-800">
+                        <div class="flex flex-wrap gap-2 font-mono text-[11px]">
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-violet-300">Scratch</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-violet-300">Logic Design</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-violet-300">Event-Driven Flow</span>
+                        </div>
+
+                        <button onclick="openModal('sim')" class="w-full py-2.5 rounded-xl glass-panel text-slate-300 hover:text-violet-accent border border-slate-700/80 hover:border-violet-500/40 text-xs font-mono font-semibold transition-all">
+                            View Details <i class="fa-solid fa-angle-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="glass-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-6 group">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 font-mono text-xs">
+                                Desktop POS System
+                            </span>
+                            <a href="https://github.com/vuthbuildsthefuture" target="_blank" class="text-slate-400 hover:text-white text-lg transition-colors">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">C++ POS Cafe System</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            A Point of Sale (POS) desktop application designed for cafe operations, featuring automated order processing, receipt generation, inventory tracking, and sales analytics.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4 pt-4 border-t border-slate-800">
+                        <div class="flex flex-wrap gap-2 font-mono text-[11px]">
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-blue-300">C++</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-blue-300">OOP</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-blue-300">Data Structures</span>
+                        </div>
+
+                        <button onclick="openModal('pos')" class="w-full py-2.5 rounded-xl glass-panel text-slate-300 hover:text-blue-400 border border-slate-700/80 hover:border-blue-500/40 text-xs font-mono font-semibold transition-all">
+                            View Details <i class="fa-solid fa-angle-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project Card 4 -->
+                <div class="glass-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-6 group">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs">
+                                Graphic Design
+                            </span>
+                            <a href="#" class="text-slate-400 hover:text-white text-lg transition-colors">
+                                <i class="fa-solid fa-palette"></i>
+                            </a>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">Graphic & Team Branding Projects</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Visual branding and vector artwork assets crafted for athletic and technical teams, featuring customized crests, clean typography, and tech-themed logo iconography.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4 pt-4 border-t border-slate-800">
+                        <div class="flex flex-wrap gap-2 font-mono text-[11px]">
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-emerald-300">Vector Design</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-emerald-300">Image Editing</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-emerald-300">Graphic Layout</span>
+                        </div>
+
+                        <button onclick="openModal('brand')" class="w-full py-2.5 rounded-xl glass-panel text-slate-300 hover:text-emerald-400 border border-slate-700/80 hover:border-emerald-500/40 text-xs font-mono font-semibold transition-all">
+                            View Details <i class="fa-solid fa-angle-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>

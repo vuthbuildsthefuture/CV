@@ -1,0 +1,48 @@
+<!-- Background Canvas for Interactive Particles -->
+    <canvas id="bg-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-40"></canvas>
+
+    <!-- Navigation Header (Numbers Removed) -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-slate-800/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl overflow-hidden bg-gradient-to-br from-cyan-500 to-violet-600 flex items-center justify-center text-white font-mono font-bold text-lg shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+                    <img src="/image.png" alt="Hong Hengdavuth" style="display:block;width:100%;height:100%;object-fit:cover" />
+                </div>
+                <div>
+                    <span class="font-mono font-bold text-white text-lg tracking-tight group-hover:text-cyan-accent transition-colors">HENGDAVUTH<span class="text-cyan-accent">.smos</span></span>
+                    <p class="text-[10px] text-slate-400 font-mono -mt-1">IT ENGINEER</p>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links without numbers -->
+            <nav class="hidden md:flex items-center space-x-1 font-mono text-sm">
+                <a href="#about" class="px-4 py-2 rounded-lg text-slate-300 hover:text-cyan-accent hover:bg-slate-800/50 transition-all">About</a>
+                <a href="#skills" class="px-4 py-2 rounded-lg text-slate-300 hover:text-cyan-accent hover:bg-slate-800/50 transition-all">Skills</a>
+                <a href="#projects" class="px-4 py-2 rounded-lg text-slate-300 hover:text-cyan-accent hover:bg-slate-800/50 transition-all">Projects</a>
+                <a href="#education" class="px-4 py-2 rounded-lg text-slate-300 hover:text-cyan-accent hover:bg-slate-800/50 transition-all">Education</a>
+                <a href="#contact" class="ml-4 px-5 py-2.5 rounded-xl bg-cyan-500/10 text-cyan-accent border border-cyan-500/30 hover:bg-cyan-500 hover:text-slate-950 font-semibold transition-all shadow-lg shadow-cyan-500/10">
+                    Contact Me
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="menu-btn" class="md:hidden text-slate-300 hover:text-cyan-accent focus:outline-none p-2 rounded-lg bg-slate-800/50 border border-slate-700/50">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown without numbers -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-b border-slate-800 px-6 py-6 space-y-4 font-mono text-sm">
+            <a href="#about" class="mobile-link block py-2 text-slate-300 hover:text-cyan-accent border-b border-slate-800">About</a>
+            <a href="#skills" class="mobile-link block py-2 text-slate-300 hover:text-cyan-accent border-b border-slate-800">Skills</a>
+            <a href="#projects" class="mobile-link block py-2 text-slate-300 hover:text-cyan-accent border-b border-slate-800">Projects</a>
+            <a href="#education" class="mobile-link block py-2 text-slate-300 hover:text-cyan-accent border-b border-slate-800">Education</a>
+            <a href="#contact" class="mobile-link block py-3 text-center rounded-xl bg-cyan-500 text-slate-950 font-bold mt-4">
+                Contact Me
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 space-y-32">

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import portfolioMarkup from './portfolio.html?raw';
+import portfolioMarkup from './portfolio.js';
 import './styles.css';
 
 const projects = {
@@ -252,7 +252,9 @@ function App() {
     <div dangerouslySetInnerHTML={{ __html: portfolioMarkup }} />
     {loading && <div className="startup-loader" role="status" aria-live="polite" aria-label={`Loading portfolio: ${loadProgress}%`}>
       <div className="startup-loader-content">
-        <div className="startup-loader-mark">HD</div>
+        <div className="startup-loader-mark">
+          <img src="/image.png" alt="Hong Hengdavuth" />
+        </div>
         <p className="startup-loader-name">HENGDAVUTH<span>.dev</span></p>
         <p className="startup-loader-caption">INITIALIZING PORTFOLIO</p>
         <div className="startup-loader-track"><div className="startup-loader-fill" style={{ width: `${loadProgress}%` }} /></div>

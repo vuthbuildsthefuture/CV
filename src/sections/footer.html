@@ -1,0 +1,26 @@
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 py-8 relative z-10 font-mono text-xs text-center text-slate-500 space-y-2">
+        <p>&copy; 2026 Hong Hengdavuth. Designed & Built for IT Engineering.</p>
+        <p class="text-[11px] text-slate-600">Built with C-Developer passion, HTML5, CSS3 & JavaScript.</p>
+    </footer>
+
+    <!-- Project Details Modal -->
+    <div id="modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div class="glass-panel max-w-lg w-full rounded-2xl p-6 sm:p-8 space-y-6 relative border border-slate-700/80 shadow-2xl">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2 text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div id="modal-content" class="space-y-4">
+                <!-- Dynamically injected modal content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Box -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden glass-panel border border-cyan-500/50 text-slate-100 px-5 py-3 rounded-xl shadow-2xl font-mono text-xs flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-cyan-accent text-base"></i>
+        <span id="toast-msg">Action completed!</span>
+    </div>
+
+    <!-- JavaScript Application Logic -->

@@ -1,0 +1,86 @@
+<!-- 1. HOME / HERO SECTION -->
+        <section id="home" class="min-h-[85vh] flex flex-col justify-center pt-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Left Column Text -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-panel border border-cyan-500/30 text-cyan-accent text-xs font-mono">
+                        <span class="w-2 h-2 rounded-full bg-cyan-accent animate-ping"></span>
+                        Available for Engineering Opportunities
+                    </div>
+
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-none">
+                        Hi, I'm <br>
+                        <span class="text-gradient">HONG HENGDAVUTH</span>
+                    </h1>
+
+                    <div class="flex items-center gap-2 font-mono text-lg sm:text-2xl text-slate-300 font-semibold">
+                        <span class="text-cyan-accent">&gt;</span>
+                        <span id="typed-role" class="cursor-blink">Information Technology Engineering</span>
+                    </div>
+
+                    <p class="text-slate-400 text-base sm:text-lg max-w-2xl font-normal leading-relaxed">
+                        Building efficient software, exploring algorithms, and solving complex problems through code.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-wrap items-center gap-4 pt-4 font-mono text-sm">
+                        <a href="#projects" class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold hover:shadow-lg hover:shadow-cyan-500/25 transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                            <span>View Projects</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                        <a href="#contact" class="px-7 py-3.5 rounded-xl glass-panel text-slate-200 hover:text-cyan-accent border border-slate-700 hover:border-cyan-500/50 transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                            <i class="fa-regular fa-envelope"></i>
+                            <span>Contact Me</span>
+                        </a>
+                    </div>
+
+                    <!-- Quick Tech Badges -->
+                    <div class="pt-8 border-t border-slate-800/80 flex flex-wrap items-center gap-6 text-slate-400 font-mono text-xs">
+                        <span class="text-slate-500 uppercase tracking-wider">Core Tech:</span>
+                        <span class="flex items-center gap-1.5 hover:text-cyan-accent transition-colors"><i class="fa-solid fa-code text-cyan-accent"></i> C / C++</span>
+                        <span class="flex items-center gap-1.5 hover:text-cyan-accent transition-colors"><i class="fa-solid fa-desktop text-violet-accent"></i> GTK GUI</span>
+                        <span class="flex items-center gap-1.5 hover:text-cyan-accent transition-colors"><i class="fa-solid fa-square-root-variable text-blue-400"></i> Applied Math</span>
+                    </div>
+                </div>
+
+                <!-- Hero Right Column: Profile Picture Frame -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative group">
+                        <!-- Neon Glow Ring behind image -->
+                        <div class="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 to-violet-600 rounded-3xl blur-lg opacity-40 group-hover:opacity-80 transition duration-500"></div>
+                        
+                        <!-- Image Frame Wrapper -->
+                        <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-3xl overflow-hidden glass-panel border border-slate-700/80 bg-slate-900 flex items-center justify-center">
+                            
+                            <!-- REPLACE 'profile.jpg' WITH YOUR ACTUAL IMAGE PATH OR URL HERE -->
+                            <img 
+                                src="/image.png"
+                                alt="Hong Hengdavuth" 
+                                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                                onerror="this.onerror=null; this.classList.add('hidden'); document.getElementById('profile-fallback').classList.remove('hidden');"
+                            />
+
+                            <!-- Fallback initials container shown when 'profile.jpg' isn't found -->
+                            <div id="profile-fallback" class="hidden flex flex-col items-center justify-center text-center p-4">
+                                <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500 to-violet-600 flex items-center justify-center text-white font-mono font-bold text-3xl mb-3 shadow-lg">
+                                    HD
+                                </div>
+                                <span class="font-mono text-xs text-slate-400">Hong Hengdavuth</span>
+                                <span class="font-mono text-[10px] text-cyan-accent mt-1">Add your image as "profile.jpg"</span>
+                            </div>
+
+                            <!-- Floating Badge -->
+                            <div class="absolute bottom-3 left-3 right-3 px-3 py-2 glass-panel border border-slate-700/80 rounded-xl flex items-center justify-between text-xs font-mono">
+                                <span class="flex items-center gap-2 text-slate-300">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                    ITE Student
+                                </span>
+                                <span class="text-cyan-accent">RUPP / ITE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>

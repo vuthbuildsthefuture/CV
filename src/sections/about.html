@@ -1,0 +1,78 @@
+<!-- 2. ABOUT ME SECTION -->
+        <section id="about" class="space-y-12">
+            <div class="flex items-center gap-4">
+                <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">About Me</h2>
+                <div class="h-px bg-slate-800 flex-1 ml-4"></div>
+            </div>
+
+            <!-- Background Card with Profile Image Thumbnail -->
+            <div class="glass-card rounded-2xl p-6 sm:p-8 space-y-6 text-slate-300 leading-relaxed flex flex-col md:flex-row gap-8 items-center md:items-start">
+                
+                <!-- Secondary Profile Photo Slot inside About Section -->
+                <div class="shrink-0 relative">
+                    <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl overflow-hidden border-2 border-cyan-500/40 shadow-xl bg-slate-900 flex items-center justify-center">
+                        <!-- REPLACE 'profile.jpg' WITH YOUR IMAGE PATH -->
+                        <img 
+                            src="/image.png" 
+                            alt="Hong Hengdavuth" 
+                            class="w-full h-full object-cover"
+                            onerror="this.onerror=null; this.classList.add('hidden'); document.getElementById('about-fallback').classList.remove('hidden');"
+                        />
+                        <div id="about-fallback" class="hidden text-center p-2">
+                            <i class="fa-solid fa-user-gear text-3xl text-cyan-accent mb-1"></i>
+                            <p class="font-mono text-[10px] text-slate-400">HENGDAVUTH</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-4 flex-1">
+                    <p class="text-base sm:text-lg">
+                        I am an <strong class="text-white font-semibold">Information Technology Engineering student</strong> focused on software development, low-level systems programming, and applied mathematics. My technical foundation centers on building reliable software applications from the ground up, with a strong emphasis on clean code structure, logical problem-solving, and efficient algorithms.
+                    </p>
+                    <p class="text-slate-400">
+                        Throughout my studies and personal projects, I have developed practical experience in <span class="text-cyan-accent font-mono">C programming</span>, working directly with development environments like MSYS2, managing dependencies, and building desktop graphical user interfaces using <span class="text-cyan-accent font-mono">GTK</span>. My approach to engineering is heavily informed by mathematical analysis—applying calculus and algorithmic principles to solve complex logic problems and parse data effectively.
+                    </p>
+                    <p class="text-slate-400">
+                        Beyond core desktop application development, I actively explore computer science fundamentals through block-based programming logic, interactive simulations, and UI/UX design concepts to create well-rounded, user-focused digital experiences.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Core Focus Areas (3 Interactive Cards) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                
+                <!-- Focus Card 1 -->
+                <div class="glass-card rounded-2xl p-6 space-y-4 hover:border-cyan-500/50 group">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-accent text-xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-cyan-accent transition-colors">Software Engineering & C Programming</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Writing performant, clean, and structured C/C++ code with low-level control, MSYS2/GCC setup, dynamic memory allocation, and modular software architecture.
+                    </p>
+                </div>
+
+                <!-- Focus Card 2 -->
+                <div class="glass-card rounded-2xl p-6 space-y-4 hover:border-violet-500/50 group">
+                    <div class="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-accent text-xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-square-root-variable"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-violet-accent transition-colors">Mathematics & Algorithm Analysis</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Applying single and multivariable calculus, linear algebra, logic operations, and mathematical parsing to engineer robust algorithm solutions.
+                    </p>
+                </div>
+
+                <!-- Focus Card 3 -->
+                <div class="glass-card rounded-2xl p-6 space-y-4 hover:border-blue-500/50 group">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-window-maximize"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors">UI Development & Desktop Applications</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Creating event-driven desktop software with responsive layouts using GTK GUI libraries, custom styling, signal mechanisms, and structured data flow.
+                    </p>
+                </div>
+
+            </div>
+        </section>
